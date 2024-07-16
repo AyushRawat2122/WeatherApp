@@ -31,8 +31,6 @@ const Astro = () => {
     };
     fetchData();
   }, [country]);
-
-  console.log(data);
   return (
   <div>
     {(loading)? <Loading/> :   <div className="mt-10 mx-2 sm:mx-16 lg:mx-40 dark:bg-slate-800 p-2">
