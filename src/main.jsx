@@ -1,26 +1,36 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import App from './App.jsx';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
 import { NextUIProvider } from '@nextui-org/react';
+import { RouterProvider , createBrowserRouter} from 'react-router-dom';
 import Home from './Pages/Home.jsx';
 import Astro from './Pages/Astro.jsx';
 import Today from './Pages/Today.jsx';
-
-const rootElement = document.getElementById('root');
-
-createRoot(rootElement).render(
-  <Router>
-    <NextUIProvider>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="Astrology" element={<Astro />} />
-          <Route path="SportsEvent" element={<Today />} />
-        </Route>
-      </Routes>
-    </NextUIProvider>
-  </Router>
-);
-
+const router = createBrowserRouter([
+  {
+    path:'/',
+    element:<App/>,
+    children:[
+      {
+        path:'/',
+        element:<Home />
+      },
+      {
+        path:'/Astrology',
+        element:<Astro/>
+      },
+      {
+        path:'/SportsEvent',
+        element:<Today/>
+      }
+    ]
+  }
+])
+ReactDOM.createRoot(document.getElementById('root')).render(
+ <RouterProvider router={router}>
+   <NextUIProvider>
+    <App />
+  </NextUIProvider>
+ </RouterProvider>
+)
