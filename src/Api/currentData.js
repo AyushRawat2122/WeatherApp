@@ -42,7 +42,7 @@ const fetchoptions = async (country) =>{
 
 const SportsEvent = async (country) =>{
     try {
-        const response = await axios.get(`http://api.weatherapi.com/v1/sports.json?key=${key}&q=${country}`)
+        const response = await axios.get(`https://api.weatherapi.com/v1/sports.json?key=${key}&q=${country}`)
         return response.data;
     } catch (error) {
         console.log(error);
