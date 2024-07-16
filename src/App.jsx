@@ -4,13 +4,20 @@ import useTheme from "./store/themeContext";
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";
 import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function App() {
+  const navigate = useNavigate();
   const theme = useTheme((state) => state.theme);
 
   useEffect(() => {
+    const { type } = performance.getEntriesByType("navigation")[0] || {};
+    if (type === "reload") {
+      navigate("/");
+    }
+
     document.querySelector("html").classList.remove("light", "dark");
     document.querySelector("html").classList.add(theme);
-  }, [theme]);
+  }, [theme , history]);
 
   return (
     <div className="flex flex-col min-h-screen dark:bg-slate-900">
