@@ -52,7 +52,7 @@ const Today = () => {
                   {(data.football?.length === 0) ?
                     <div className="flex flex-col items-center dark:bg-slate-700 bg-white rounded-md py-10 capitalize">
                       <MdStadium className="text-[100px] text-violet-900 dark:text-violet-200"></MdStadium>
-                      <p className="text-2xl text-violet-900 dark:text-violet-200">
+                      <p className="text-center text-2xl text-violet-900 dark:text-violet-200">
                         No Matches found for today
                       </p>
                     </div>
@@ -81,7 +81,7 @@ const Today = () => {
                   {(data?.cricket?.length === 0) ?
                     <div className="flex flex-col items-center dark:bg-slate-700 bg-white rounded-md py-10 capitalize">
                       <MdStadium className="text-[100px] text-violet-900 dark:text-violet-200"></MdStadium>
-                      <p className="text-2xl text-violet-900 dark:text-violet-200">
+                      <p className="text-center text-2xl text-violet-900 dark:text-violet-200">
                         No Matches found for today
                       </p>
                     </div>
@@ -110,7 +110,7 @@ const Today = () => {
                   {(data?.golf?.length === 0) ? 
                     <div className="flex flex-col items-center dark:bg-slate-700 bg-white rounded-md py-10 capitalize">
                       <MdStadium className="text-[100px] text-violet-900 dark:text-violet-200"></MdStadium>
-                      <p className="text-2xl text-violet-900 dark:text-violet-200">
+                      <p className="text-center text-2xl text-violet-900 dark:text-violet-200">
                         No Matches found for today
                       </p>
                     </div>
