@@ -12,7 +12,7 @@ const Today = () => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(true);
   const country = useStore((state) => state.country);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ football: [], cricket: [], golf: [] });
   const id1 = useId();
   const id2 = useId();
   const id3 = useId();
@@ -31,7 +31,6 @@ const Today = () => {
     };
     fetchData();
   }, [country]);
-
   return (
     <div className="mt-10 mx-2 sm:mx-16 lg:mx-40">
       {loading ? (
@@ -50,16 +49,16 @@ const Today = () => {
                   FootBall:
                 </p>
                 <div>
-                  {data?.football.length === 0 ? (
+                  {(data.football?.length === 0) ?
                     <div className="flex flex-col items-center dark:bg-slate-700 bg-white rounded-md py-10 capitalize">
                       <MdStadium className="text-[100px] text-violet-900 dark:text-violet-200"></MdStadium>
                       <p className="text-2xl text-violet-900 dark:text-violet-200">
                         No Matches found for today
                       </p>
                     </div>
-                  ) : (
+                   : 
                     <div className="flex flex-col gap-3">
-                      {data?.football.map((match , index) => {
+                      {data.football.map((match , index) => {
                         const id = `${id1}+${index}`;
                         return (
                           <div key={id} className="p-2 flex gap-5 bg-white dark:bg-slate-700 items-center md:p-5 rounded-md">
@@ -73,20 +72,20 @@ const Today = () => {
                         );
                       })}
                     </div>
-                  )}
+                  }
                 </div>
                 <p className="mt-3 text-2xl text-violet-900 dark:text-violet-200 ">
                   Cricket:{" "}
                 </p>
                 <div>
-                  {data?.cricket.length === 0 ? (
+                  {(data?.cricket?.length === 0) ?
                     <div className="flex flex-col items-center dark:bg-slate-700 bg-white rounded-md py-10 capitalize">
                       <MdStadium className="text-[100px] text-violet-900 dark:text-violet-200"></MdStadium>
                       <p className="text-2xl text-violet-900 dark:text-violet-200">
                         No Matches found for today
                       </p>
                     </div>
-                  ) : (
+                   : 
                     <div className="flex flex-col gap-3">
                       {data?.cricket.map((match,index) => {
                         const id = `${id2}+${index}`;
@@ -102,20 +101,20 @@ const Today = () => {
                         );
                       })}
                     </div>
-                  )}
+                  }
                 </div>
                 <p className="mt-3 text-2xl text-violet-900 dark:text-violet-200 ">
                   Golf Matches:{" "}
                 </p>
                 <div>
-                  {data?.golf.length === 0 ? (
+                  {(data?.golf?.length === 0) ? 
                     <div className="flex flex-col items-center dark:bg-slate-700 bg-white rounded-md py-10 capitalize">
                       <MdStadium className="text-[100px] text-violet-900 dark:text-violet-200"></MdStadium>
                       <p className="text-2xl text-violet-900 dark:text-violet-200">
                         No Matches found for today
                       </p>
                     </div>
-                  ) : (
+                   : 
                     <div className="flex flex-col gap-3">
                       {data?.golf.map((match,index) => {
                         const id = `${id3}+${index}`;
@@ -131,7 +130,7 @@ const Today = () => {
                         );
                       })}
                     </div>
-                  )}
+                  }
                 </div>
               </div>
             </div>
