@@ -109,7 +109,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <h1 className="lg:mt-14 text-3xl sm:text-2xl text-violet-900 dark:text-violet-200  font-semibold">Wind Statistics</h1>
+      <h1 className="mt-7 lg:mt-14 text-3xl sm:text-2xl text-violet-900 dark:text-violet-200  font-semibold">Wind Statistics</h1>
       <div className=" bg-violet-50 dark:bg-slate-800 grid align-middle sm:justify-items-center gap-5 p-4 sm:grid-cols-3 rounded-md">
         <div className="flex items-center text-violet-900 dark:text-violet-200 font-medium">
           <WiCloudyGusts className="text-4xl text-violet-900 dark:text-violet-200 sm:text-5xl"></WiCloudyGusts>
@@ -136,7 +136,7 @@ const Home = () => {
            Wind Chill :{data?.current?.windchill_c}&deg;C
         </div>
       </div>
-      <h1 className="lg:mt-14 text-3xl sm:text-2xl text-violet-900 dark:text-violet-200 font-semibold">Daily ForeCast</h1>
+      <h1 className="mt-7 lg:mt-14 text-3xl sm:text-2xl text-violet-900 dark:text-violet-200 font-semibold">Daily ForeCast</h1>
       <div className="bg-violet-50 dark:bg-slate-800 p-3 grid gap-3 xl:grid-cols-2">
         {
           dayForecast.map((dayForecast)=>{

@@ -11,17 +11,17 @@ const DisplayCard = ({ hour }) => {
   return (
     <div className="bg-white rounded-md dark:bg-slate-700 flex flex-col p-3 w-full">
        <p className="text-lg underline underline-offset-2 text-violet-900 dark:text-violet-200">{hour?.time.trim('/')}</p>
-     <div className="flex items-center">
+     <div className="grid grid-cols-[1fr_3fr] w-full items-center gap-2 md:gap-5">
        <img src={pixelize(hour?.condition?.icon)} alt="" className="rounded-full w-[64px] sm:w-[120px]"/>
       <div className="text-violet-900 dark:text-violet-200">
-        <div className="flex gap-10 w-full items-center">
-          <div>
-            <p className="text-3xl sm:text-3xl">{hour?.temp_c}&deg;C</p>
-            <p>{hour?.condition?.text}</p>
+        <div className="grid grid-cols-[1fr_2fr] align-middle items-center gap-3">
+          <div className="items-center">
+            <p className="text-2xl sm:text-4xl">{hour?.temp_c}&deg;C</p>
+            <p className="text-small sm:text-lg">{hour?.condition?.text}</p>
           </div>
-          <div>
-            <p className="flex items-center"> <WiHumidity className="text-2xl text-violet-900 dark:text-violet-200 sm:text-5xl"></WiHumidity>Humidity:{hour?.humidity}</p>
-            <p className="flex items-center"> <WiRain className="text-2xl text-violet-900 dark:text-violet-200 sm:text-5xl"></WiRain>Precipitation: {hour?.precip_in}</p>
+          <div className="items-center">
+            <p className="flex items-center text-small sm:text-lg"> <WiHumidity className="text-2xl text-violet-900 dark:text-violet-200 sm:text-5xl"></WiHumidity>Humidity:{hour?.humidity}</p>
+            <p className="flex items-center text-small sm:text-lg"> <WiRain className="text-2xl text-violet-900 dark:text-violet-200 sm:text-5xl"></WiRain>Precipitation: {hour?.precip_in}</p>
           </div>
         </div>
       </div>
