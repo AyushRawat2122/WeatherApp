@@ -1,38 +1,47 @@
-import React , {useState} from "react";
+import React, { useState , useEffect } from "react";
 import { fetchoptions } from "../Api/currentData";
 import { IoIosCloseCircle } from "react-icons/io";
 import useStore from "../store/country";
 import { Button } from "@nextui-org/react";
 
-const SearchBar = ({className}) => {
-  const [input, setInput] = useState("usa");
+const SearchBar = ({ className }) => {
+  const [input, setInput] = useState("");
   const [inputOpt, setInputOpt] = useState([]);
   const updateCountry = useStore((state) => state.updateCountry);
-  const [error, setError] = useState();
-  const handleChange = (e) => {
-    setInputOpt([]);
-    let country = e.target.value.replaceAll('-', '/');
+  const [error, setError] = useState(null);
+
+   const handleChange = (e) => {
+    setError(null);
+    let country = e.target.value.replaceAll("-", "/");
     setInput(country);
+  };
+
+  useEffect(() => {
     const fetchData = async () => {
       if (input.length > 1) {
         try {
           const data = await fetchoptions(input);
-        setInputOpt(data);
+          setInputOpt(data);
         } catch (error) {
-          setError(error);
+          setError(error.message);
+          console.error(error);
         }
+      } else {
+        setInputOpt([]);
       }
     };
+
     fetchData();
-  };
+  }, [input]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setInputOpt([]);
     updateCountry(input);
   };
+
   return (
-    <div className= {`gap-5 items-center ${className}`}>
+    <div className={`gap-5 items-center ${className}`}>
       <form
         className=" bg-violet-300 rounded-full flex"
         onSubmit={handleSubmit}
@@ -53,27 +62,24 @@ const SearchBar = ({className}) => {
             placeholder="city/state/country"
           />
           <div className="mt-1 absolute top-[100%] bg-violet-100 w-[100%] rounded-sm">
-        
-                {
-                  (error)? <ul><li className=" text-violet-800 text-md rounded-md font-medium cursor-pointer hover:bg-violet-200 p-1 border-b-1 border-violet-200">no results found</li></ul> : <ul>{
-                    inputOpt.map((opt) => {
-                      return (
-                        <li
-                          key={opt.id}
-                          className=" text-violet-800 text-md rounded-md font-medium cursor-pointer hover:bg-violet-200 p-1 border-b-1 border-violet-200"
-                          onClick={() => {
-                            setInput(opt.url);
-                            setInputOpt([]);
-                          }}
-                        >
-                          {" "}
-                          {`${opt.name}/${opt.region}/${opt.country}`}{" "}
-                        </li>
-                      );
-                    })
-                    }</ul>
-                }
-
+          {error ? (
+              <div></div>
+            ) : (
+              <ul>
+                {inputOpt.map((opt) => (
+                  <li
+                    key={opt.id}
+                    className="text-violet-800 text-md rounded-md font-medium cursor-pointer hover:bg-violet-200 p-1 border-b-1 border-violet-200"
+                    onClick={() => {
+                      setInput(opt.url);
+                      setInputOpt([]);
+                    }}
+                  >
+                    {`${opt.name}/${opt.region}/${opt.country}`}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
         <Button
