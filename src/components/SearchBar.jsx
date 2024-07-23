@@ -5,7 +5,7 @@ import useStore from "../store/country";
 import { Button } from "@nextui-org/react";
 
 const SearchBar = ({className}) => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState("usa");
   const [inputOpt, setInputOpt] = useState([]);
   const updateCountry = useStore((state) => state.updateCountry);
   const [error, setError] = useState();
