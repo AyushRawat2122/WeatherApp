@@ -8,15 +8,19 @@ const SearchBar = ({className}) => {
   const [input, setInput] = useState("");
   const [inputOpt, setInputOpt] = useState([]);
   const updateCountry = useStore((state) => state.updateCountry);
-
+  const [error, setError] = useState();
   const handleChange = (e) => {
     setInputOpt([]);
     let country = e.target.value.replaceAll('-', '/');
     setInput(country);
     const fetchData = async () => {
       if (input.length > 1) {
-        const data = await fetchoptions(input);
+        try {
+          const data = await fetchoptions(input);
         setInputOpt(data);
+        } catch (error) {
+          setError(error);
+        }
       }
     };
     fetchData();
@@ -38,6 +42,7 @@ const SearchBar = ({className}) => {
             className="text-violet-100 text-2xl cursor-pointer"
             onClick={() => {
               setInput("");
+              setInputOpt([]);
             }}
           />
           <input
@@ -48,23 +53,27 @@ const SearchBar = ({className}) => {
             placeholder="city/state/country"
           />
           <div className="mt-1 absolute top-[100%] bg-violet-100 w-[100%] rounded-sm">
-            <ul>
-              {inputOpt.map((opt) => {
-                return (
-                  <li
-                    key={opt.id}
-                    className=" text-violet-800 text-md rounded-md font-medium cursor-pointer hover:bg-violet-200 p-1 border-b-1 border-violet-200"
-                    onClick={() => {
-                      setInput(opt.url);
-                      setInputOpt([]);
-                    }}
-                  >
-                    {" "}
-                    {`${opt.name}/${opt.region}/${opt.country}`}{" "}
-                  </li>
-                );
-              })}
-            </ul>
+        
+                {
+                  (error)? <ul><li className=" text-violet-800 text-md rounded-md font-medium cursor-pointer hover:bg-violet-200 p-1 border-b-1 border-violet-200">no results found</li></ul> : <ul>{
+                    inputOpt.map((opt) => {
+                      return (
+                        <li
+                          key={opt.id}
+                          className=" text-violet-800 text-md rounded-md font-medium cursor-pointer hover:bg-violet-200 p-1 border-b-1 border-violet-200"
+                          onClick={() => {
+                            setInput(opt.url);
+                            setInputOpt([]);
+                          }}
+                        >
+                          {" "}
+                          {`${opt.name}/${opt.region}/${opt.country}`}{" "}
+                        </li>
+                      );
+                    })
+                    }</ul>
+                }
+
           </div>
         </div>
         <Button

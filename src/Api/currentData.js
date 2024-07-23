@@ -36,7 +36,7 @@ const fetchoptions = async (country) =>{
         const response = await axios.get(`https://api.weatherapi.com/v1/search.json?key=${key}&q=${country}`)
         return response.data;
     } catch (error) {
-        console.log(error);
+       throw error;
     }
 }
 
