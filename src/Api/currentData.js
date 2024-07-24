@@ -45,7 +45,6 @@ const SportsEvent = async (country) =>{
         const response = await axios.get(`https://api.weatherapi.com/v1/sports.json?key=${key}&q=${country}`)
         return response.data;
     } catch (error) {
-        console.log(error);
         throw error;
     }
 }

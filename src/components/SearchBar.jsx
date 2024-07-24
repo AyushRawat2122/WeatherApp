@@ -24,7 +24,6 @@ const SearchBar = ({ className }) => {
           setInputOpt(data);
         } catch (error) {
           setError(error.message);
-          console.error(error);
         }
       } else {
         setInputOpt([]);

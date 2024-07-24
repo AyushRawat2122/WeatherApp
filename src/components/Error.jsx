@@ -1,7 +1,6 @@
 import React from 'react';
 import errorImg from '../Assets/error.png'
 const Error = ({error}) => {
-    console.log(error);
     return (
         <div className='mt-20'>
             <div className='flex items-center flex-wrap flex-col sm:flex-row'>
