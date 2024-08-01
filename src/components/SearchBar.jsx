@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState , useEffect, useCallback } from "react";
 import { fetchoptions } from "../Api/currentData";
 import { IoIosCloseCircle } from "react-icons/io";
 import useStore from "../store/country";
@@ -16,20 +16,21 @@ const SearchBar = ({ className }) => {
     setInput(country);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      console.log(isSelected);
-      if (input.length > 1) {
-        try {
-          const data = await fetchoptions(input);
-          setInputOpt(data);
-        } catch (error) {
-          setError(error.message);
-        }
-      } else {
-        setInputOpt([]);
+  const fetchData = useCallback( async () => {
+    console.log(isSelected);
+    if (input.length > 1) {
+      try {
+        const data = await fetchoptions(input);
+        setInputOpt(data);
+      } catch (error) {
+        setError(error.message);
       }
-    };
+    } else {
+      setInputOpt([]);
+    }
+  } , [input])
+
+  useEffect(() => {
     if(!isSelected){
     fetchData();
     }
