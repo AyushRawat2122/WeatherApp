@@ -9,7 +9,7 @@ const SearchBar = ({ className }) => {
   const [inputOpt, setInputOpt] = useState([]);
   const updateCountry = useStore((state) => state.updateCountry);
   const [error, setError] = useState(null);
-
+  const [isSelected , setIsSelected] = useState(false);
    const handleChange = (e) => {
     setError(null);
     let country = e.target.value.replaceAll("-", "/");
@@ -18,6 +18,7 @@ const SearchBar = ({ className }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log(isSelected);
       if (input.length > 1) {
         try {
           const data = await fetchoptions(input);
@@ -29,8 +30,10 @@ const SearchBar = ({ className }) => {
         setInputOpt([]);
       }
     };
-
+    if(!isSelected){
     fetchData();
+    }
+    setIsSelected(false);
   }, [input]);
 
   const handleSubmit = (e) => {
@@ -72,6 +75,7 @@ const SearchBar = ({ className }) => {
                     onClick={() => {
                       setInput(opt.url);
                       setInputOpt([]);
+                      setIsSelected(true);
                     }}
                   >
                     {`${opt.name}/${opt.region}/${opt.country}`}
