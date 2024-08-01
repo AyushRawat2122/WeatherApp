@@ -17,7 +17,6 @@ const SearchBar = ({ className }) => {
   };
 
   const fetchData = useCallback( async () => {
-    console.log(isSelected);
     if (input.length > 1) {
       try {
         const data = await fetchoptions(input);
